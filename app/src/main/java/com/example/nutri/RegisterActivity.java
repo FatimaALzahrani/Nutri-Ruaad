@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             String location = locationEditText.getText().toString().trim();
             String name = nameEditText.getText().toString().trim();
 
-            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(age) || TextUtils.isEmpty(location)) {
+            if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(age) || TextUtils.isEmpty(location) || TextUtils.isEmpty(name)) {
                 Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -62,13 +63,24 @@ public class RegisterActivity extends AppCompatActivity {
                                 userData.put("email", email);
                                 userData.put("age", age);
                                 userData.put("location", location);
-                                userData.put("name",name);
+                                userData.put("name", name);
 
                                 mDatabase.child("users").child(uid).setValue(userData)
                                         .addOnSuccessListener(aVoid -> {
-                                            Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                            finish();
+                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                    .setDisplayName(name)
+                                                    .build();
+
+                                            user.updateProfile(profileUpdates)
+                                                    .addOnCompleteListener(updateTask -> {
+                                                        if (updateTask.isSuccessful()) {
+                                                            Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                                                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                                            finish();
+                                                        } else {
+                                                            Toast.makeText(RegisterActivity.this, "Error updating profile: " + updateTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
                                         })
                                         .addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Error saving data: " + e.getMessage(), Toast.LENGTH_SHORT).show());
                             }

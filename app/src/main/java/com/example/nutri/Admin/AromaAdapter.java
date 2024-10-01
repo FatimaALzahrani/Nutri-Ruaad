@@ -1,6 +1,5 @@
-package com.example.nutri;
+package com.example.nutri.Admin;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.nutri.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -78,11 +78,11 @@ public class AromaAdapter extends RecyclerView.Adapter<AromaAdapter.AromaViewHol
                 if (isLike) {
                     userLikes++;
                     userAromaRef.child("likes").setValue(userLikes);
-                    updateGlobalCounts(globalAromaRef, true);
+                    updateGlobalCounts(globalAromaRef);
                 } else {
                     userDislikes++;
                     userAromaRef.child("dislikes").setValue(userDislikes);
-                    updateGlobalCounts(globalAromaRef, false);
+                    updateGlobalCounts(globalAromaRef);
                 }
 
                 notifyDataSetChanged();
@@ -95,7 +95,7 @@ public class AromaAdapter extends RecyclerView.Adapter<AromaAdapter.AromaViewHol
         });
     }
 
-    private void updateGlobalCounts(DatabaseReference globalAromaRef, boolean isLike) {
+    private void updateGlobalCounts(DatabaseReference globalAromaRef) {
         globalAromaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -105,11 +105,8 @@ public class AromaAdapter extends RecyclerView.Adapter<AromaAdapter.AromaViewHol
                 if (currentLikes == null) currentLikes = 0L;
                 if (currentDislikes == null) currentDislikes = 0L;
 
-                if (isLike) {
-                    globalAromaRef.child("likes").setValue(++currentLikes);
-                } else {
-                    globalAromaRef.child("dislikes").setValue(++currentDislikes);
-                }
+                globalAromaRef.child("likes").setValue(++currentLikes);
+                globalAromaRef.child("dislikes").setValue(++currentDislikes);
 
                 notifyDataSetChanged();
             }

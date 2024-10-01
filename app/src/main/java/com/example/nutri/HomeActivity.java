@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         energyProgress = findViewById(R.id.progressEnergy);
         heartRateProgress = findViewById(R.id.progressHeartRate);
         activityLevelProgress = findViewById(R.id.progressActivityLevel);
@@ -69,7 +72,18 @@ public class HomeActivity extends AppCompatActivity {
 
         energyChart = findViewById(R.id.energyChart);
 
-        helloText.setText("Hello");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userName = user.getDisplayName();
+            if (userName != null) {
+                helloText.setText("Hello, " + userName);
+            } else {
+                helloText.setText("Hello");
+            }
+        } else {
+            helloText.setText("Hello");
+        }
+
         nextMealText.setText("Your next meal is in 13 min");
         heartRateProgress.setProgress(50);
         activityLevelProgress.setProgress(89);

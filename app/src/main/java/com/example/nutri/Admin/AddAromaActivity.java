@@ -1,4 +1,4 @@
-package com.example.nutri;
+package com.example.nutri.Admin;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +16,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.nutri.Aroma;
+import com.example.nutri.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -87,7 +89,6 @@ public class AddAromaActivity extends AppCompatActivity {
                     String imageUrl = uri.toString();
 
                     DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("aromas");
-                    String aromaId = databaseRef.push().getKey();
 
                     Aroma newAroma = new Aroma(name, 0, 0, imageUrl);
                     databaseRef.child(name).setValue(newAroma);

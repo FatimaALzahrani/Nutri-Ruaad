@@ -33,10 +33,13 @@
             android:name=".PersonalInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".Admin.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".AddAromaActivity"
+            android:name=".Admin.AddAromaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.AdminAromasActivity"
             android:exported="false" />
         <activity
             android:name=".NutritionActivity"
