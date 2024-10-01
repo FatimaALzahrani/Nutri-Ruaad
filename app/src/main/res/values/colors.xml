@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="my_light_primary">#F4FFFC</color>
+    <color name="primaryColor">#288B79</color>
+    <color name="pragraph">#385577</color>
+    <color name="red">#D85555</color>
+</resources>

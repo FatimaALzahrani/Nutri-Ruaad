@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    tools:context=".AromasActivity"
+    android:background="@color/my_light_primary"
+    android:layoutDirection="ltr"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aromas Management"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:id="@+id/textViewPragraph"
+        android:text="Awesome Astronaut!\nYou can now manage aromas and add new aromas from the library!"
+        android:textSize="20sp"
+        android:textColor="#010B47"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="24dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAromas"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:onClick="Add"
+        android:id="@+id/add">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add odor"
+            android:textColor="#418F87"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/home2"
+                android:onClick="Home"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/aromas"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/user2"
+                android:onClick="Profile"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/chart2"
+                android:onClick="Nutrition"
+                android:scaleType="centerInside"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

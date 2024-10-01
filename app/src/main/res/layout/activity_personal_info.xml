@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/my_light_primary"
+    android:layoutDirection="ltr"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:text="Personal Information"
+        android:textColor="#4DA893"
+        android:gravity="center"
+        android:id="@+id/title"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textColorHint="#676767"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:textColorHint="#676767"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_below="@+id/et_name"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/et_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:gravity="center"
+        android:textColorHint="#676767"
+        android:layout_below="@+id/et_age"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Height (cm)"
+        android:inputType="number"
+        android:gravity="center"
+        android:textColorHint="#676767"
+        android:layout_below="@+id/et_location"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Weight (kg)"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColorHint="#676767"
+        android:layout_below="@+id/et_height"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <EditText
+        android:id="@+id/et_job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Job"
+        android:gravity="center"
+        android:layout_below="@+id/et_weight"
+        android:layout_marginTop="16dp"
+        android:textColorHint="#676767"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:enabled="false"/>
+
+    <LinearLayout
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/et_job"
+        android:background="@drawable/button"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        >
+        <TextView
+            android:id="@+id/text_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Edite"/>
+    </LinearLayout>
+
+</RelativeLayout>

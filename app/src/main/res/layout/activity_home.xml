@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:layoutDirection="ltr"
+    android:background="@color/my_light_primary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+        <TextView
+            android:id="@+id/helloText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/rounded_corner_background"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/mealTimeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Your next meal is in 13 min"
+                android:textSize="18sp"
+                android:gravity="start"
+                />
+
+            <ImageView
+                android:id="@+id/mealIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon"
+                android:contentDescription="Icon"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/healthStatusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health status"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressHeartRate"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="50"
+                    android:progressDrawable="@drawable/circular_progress"/>
+
+                <TextView
+                    android:id="@+id/textHeartRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50%"
+                    android:textColor="@android:color/black"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart rate"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@id/progressHeartRate"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressActivityLevel"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="89"
+                    android:progressDrawable="@drawable/circular_progress"/>
+
+                <TextView
+                    android:id="@+id/textActivityLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="89%"
+                    android:textColor="@android:color/black"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Activity level"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@id/progressActivityLevel"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressEnergy"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="89"
+                    android:progressDrawable="@drawable/circular_progress"/>
+
+                <TextView
+                    android:id="@+id/textEnergy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="89%"
+                    android:textColor="@android:color/black"
+                    android:layout_centerInParent="true"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Energy"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@id/progressEnergy"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!-- Total Energy Level Chart -->
+        <TextView
+            android:id="@+id/totalEnergyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total energy level"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/energyChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+        <FrameLayout
+            android:layout_marginTop="-40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/home"
+                    android:scaleType="centerInside"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/aromas2"
+                    android:onClick="Aromas"
+                    android:scaleType="centerInside"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/user2"
+                    android:onClick="Profile"
+                    android:scaleType="centerInside"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/chart2"
+                    android:onClick="Nutrition"
+                    android:scaleType="centerInside"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>

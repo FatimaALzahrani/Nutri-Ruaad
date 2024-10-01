@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:background="@color/my_light_primary"
+    tools:context=".NutritionActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nutrition Management"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#010B47"
+        android:gravity="center"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/banner"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        android:layout_marginBottom="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/score"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="20dp">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    >
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:indeterminate="false"
+                android:layout_marginTop="20dp"
+                android:max="4"
+                android:id="@+id/progress"
+                android:progress="0"
+                android:progressDrawable="@drawable/circular_progress2" />
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0/4"
+        android:paddingTop="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true" />
+</RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+        <TextView
+            android:id="@+id/goalStatusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Great!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#A7E0C4"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are almost at your daily goal"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+        android:gravity="center" />
+
+
+    </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daily meals"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coffee"
+            android:id="@+id/radioButtonCoffee"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:onClick="daily"
+            />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.5 liters of water"
+            android:textSize="16sp"
+            android:id="@+id/radioButtonWater"
+            android:textColor="@color/black"
+            android:onClick="daily"
+            />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pizza"
+            android:textColor="@color/black"
+            android:id="@+id/radioButtonPizza"
+            android:textSize="16sp"
+            android:onClick="daily"
+            />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cheese pies"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:id="@+id/radioButtonCheesePies"
+            android:onClick="daily"
+            />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daily Calories Consumed"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/my_light_primary"
+        android:layout_marginBottom="120dp"/>
+
+</LinearLayout>
+        </ScrollView>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/home2"
+                android:onClick="Home"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/aromas2"
+                android:onClick="Aromas"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/user2"
+                android:onClick="Profile"
+                android:scaleType="centerInside"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/chart"
+                android:scaleType="centerInside"/>
+        </LinearLayout>
+
+    </FrameLayout>
+    </RelativeLayout>
+</LinearLayout>
