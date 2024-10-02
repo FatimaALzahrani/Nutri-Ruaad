@@ -3,7 +3,9 @@ package com.example.nutri;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -30,6 +32,9 @@ public class AromasActivity extends AppCompatActivity {
     private RecyclerView recyclerViewAromas;
     private AromaAdapter aromaAdapter;
     private ArrayList<Aroma> aromaList;
+    TextView noSmell2 ;
+    ImageView noSmell1;
+    int i=0;
 
     private ArrayList<Aroma> availableAromas = new ArrayList<>();
 
@@ -47,6 +52,10 @@ public class AromasActivity extends AppCompatActivity {
         loadAvailableAromas();
 
         recyclerViewAromas = findViewById(R.id.recyclerViewAromas);
+
+        noSmell2 = findViewById(R.id.nosmell2);
+        noSmell1 = findViewById(R.id.nosmell1);
+
         recyclerViewAromas.setLayoutManager(new LinearLayoutManager(this));
 
         aromaList = new ArrayList<>();
@@ -97,7 +106,15 @@ public class AromasActivity extends AppCompatActivity {
                     int Likes = aromaSnapshot.child("likes").getValue(Integer.class);
                     int Dislikes = aromaSnapshot.child("dislikes").getValue(Integer.class);
                     Aroma aroma = new Aroma(name,Likes,Dislikes,imageUrl);
+                    i++;
                     aromaList.add(aroma);
+                }
+                if(i==0){
+                    noSmell1.setVisibility(View.VISIBLE);
+                    noSmell2.setVisibility(View.VISIBLE);
+                }else{
+                    noSmell1.setVisibility(View.GONE);
+                    noSmell2.setVisibility(View.GONE);
                 }
                 aromaAdapter.notifyDataSetChanged();
             }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/my_light_primary"
     android:layoutDirection="ltr"
-    tools:context=".ProfileActivity">
+    tools:context=".Admin.UserDetailsActivity">
 
     <FrameLayout
         android:layout_width="wrap_content"

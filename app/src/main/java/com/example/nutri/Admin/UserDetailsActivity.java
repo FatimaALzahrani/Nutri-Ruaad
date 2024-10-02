@@ -107,10 +107,13 @@ public class UserDetailsActivity extends AppCompatActivity {
                 int totalTasks = 0;
 
                 for (DataSnapshot taskSnapshot : snapshot.getChildren()) {
-                    boolean isCompleted = taskSnapshot.getValue(Boolean.class);
-                    totalTasks++;
-                    if (isCompleted) {
-                        completedTasks++;
+                    Object value = taskSnapshot.getValue();
+                    if (!(value instanceof Number)) {
+                        boolean isCompleted = taskSnapshot.getValue(Boolean.class);
+                        totalTasks++;
+                        if (isCompleted) {
+                            completedTasks++;
+                        }
                     }
                 }
 

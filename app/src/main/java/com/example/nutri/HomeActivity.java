@@ -25,20 +25,27 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private TextView nextMealText;
+    private final String[] mealTimes = {"08:00", "13:00", "18:00"};
+    private Timer timer;
     private ProgressBar heartRateProgress, activityLevelProgress, energyProgress;
-    private TextView helloText, nextMealText, heartRateText, activityLevelText, energyText;
+    private TextView helloText, heartRateText, activityLevelText, energyText;
     private LineChart energyChart;
 
     @Override
@@ -58,38 +65,122 @@ public class HomeActivity extends AppCompatActivity {
         heartRateText = findViewById(R.id.textHeartRate);
         activityLevelText = findViewById(R.id.textActivityLevel);
         energyText = findViewById(R.id.textEnergy);
-
-        energyProgress.setProgress(89);
-        heartRateProgress.setProgress(50);
-        activityLevelProgress.setProgress(89);
-
-        heartRateText.setText(heartRateProgress.getProgress() + "%");
-        energyText.setText(energyProgress.getProgress() + "%");
-        activityLevelText.setText(activityLevelProgress.getProgress() + "%");
-
-        helloText = findViewById(R.id.helloText);
         nextMealText = findViewById(R.id.mealTimeText);
-
+        helloText = findViewById(R.id.helloText);
         energyChart = findViewById(R.id.energyChart);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            String uid = user.getUid();
+
+            DatabaseReference userVitalSignsRef = FirebaseDatabase.getInstance().getReference("users")
+                    .child(uid)
+                    .child("vital_signs");
+
+            userVitalSignsRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Integer heartRate = snapshot.child("heart_rate").getValue(Integer.class);
+                        Integer energyLevel = snapshot.child("energy_level").getValue(Integer.class);
+                        Integer oxygenLevel = snapshot.child("oxygen_level").getValue(Integer.class);
+
+                        if (heartRate != null && energyLevel != null && oxygenLevel != null) {
+                            heartRateProgress.setProgress(heartRate);
+                            energyProgress.setProgress(energyLevel);
+                            activityLevelProgress.setProgress(oxygenLevel);
+
+                            heartRateText.setText(heartRate + "%");
+                            energyText.setText(energyLevel + "%");
+                            activityLevelText.setText(oxygenLevel + "%");
+                        } else {
+                            Toast.makeText(HomeActivity.this, "Error fetching vital signs", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Firebase", "Failed to read data: " + error.getMessage());
+                }
+            });
+
             String userName = user.getDisplayName();
-            if (userName != null) {
-                helloText.setText("Hello, " + userName);
-            } else {
-                helloText.setText("Hello");
-            }
-        } else {
-            helloText.setText("Hello");
+            helloText.setText("Hello, " + (userName != null ? userName : ""));
+            setupEnergyChart();
         }
 
-        nextMealText.setText("Your next meal is in 13 min");
-        heartRateProgress.setProgress(50);
-        activityLevelProgress.setProgress(89);
-        energyProgress.setProgress(89);
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> updateNextMealText());
+            }
+        }, 0, 60000);
+    }
 
-        setupEnergyChart();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    private void updateNextMealText() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Calendar now = Calendar.getInstance();
+
+        String currentTime = sdf.format(now.getTime());
+        String nextMealTime = getNextMealTime(currentTime);
+
+        if (nextMealTime != null) {
+            try {
+                long remainingMinutes = getMinutesDifference(currentTime, nextMealTime);
+
+                if (remainingMinutes > 60) {
+                    long remainingHours = remainingMinutes / 60;
+                    long remainingMins = remainingMinutes % 60;
+                    String hourText = remainingHours > 1 ? "hours" : "hour";
+                    nextMealText.setText("Your next meal is in " + remainingHours + " " + hourText + (remainingMins > 0 ? " and " + remainingMins + " minutes" : ""));
+                } else if (remainingMinutes > 0) {
+                    nextMealText.setText("Your next meal is in " + remainingMinutes + " minutes");
+                } else {
+                    nextMealText.setText("It's time for your next meal!");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                nextMealText.setText("Error calculating meal time.");
+            }
+        } else {
+            nextMealText.setText("No more meals today.");
+        }
+    }
+
+    private String getNextMealTime(String currentTime) {
+        for (String mealTime : mealTimes) {
+            if (mealTime.compareTo(currentTime) > 0) {
+                return mealTime;
+            }
+        }
+        if (currentTime.compareTo(mealTimes[mealTimes.length - 1]) > 0) {
+            return mealTimes[mealTimes.length - 1];
+        }
+        return null;
+    }
+
+
+    private long getMinutesDifference(String startTime, String endTime) throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+
+        startCal.setTime(sdf.parse(startTime));
+        endCal.setTime(sdf.parse(endTime));
+
+        long diffMillis = endCal.getTimeInMillis() - startCal.getTimeInMillis();
+        return diffMillis / (60 * 1000);
     }
 
     private void setupEnergyChart() {
@@ -105,7 +196,7 @@ public class HomeActivity extends AppCompatActivity {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users")
                 .child(uid)
-                .child("energy_levels/week_39");
+                .child("energy_levels");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -115,8 +206,10 @@ public class HomeActivity extends AppCompatActivity {
                 for (int i = 0; i < daysOfWeek.length; i++) {
                     String day = daysOfWeek[i];
                     if (dataSnapshot.hasChild(day)) {
-                        float energyHours = dataSnapshot.child(day).getValue(Float.class);
-                        entries.add(new Entry(i, energyHours));
+                        Float energyHours = dataSnapshot.child(day).getValue(Float.class);
+                        if (energyHours != null) {
+                            entries.add(new Entry(i, energyHours));
+                        }
                     }
                 }
 
@@ -147,7 +240,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void Nutrition(View view) {
         Intent intent = new Intent(HomeActivity.this, NutritionActivity.class);
