@@ -75,7 +75,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/bg"
+            android:src="@drawable/nav"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
 
@@ -111,13 +111,6 @@
                 android:onClick="Profile"
                 android:scaleType="centerInside"/>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/chart2"
-                android:onClick="Nutrition"
-                android:scaleType="centerInside"/>
         </LinearLayout>
 
     </FrameLayout>

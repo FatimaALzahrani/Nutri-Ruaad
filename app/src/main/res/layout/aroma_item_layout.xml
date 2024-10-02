@@ -1,0 +1,28 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_gravity="center"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:layoutDirection="ltr"
+    android:background="@drawable/rounded_corner_background"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/aromaName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#010B47"
+        android:padding="1dp"
+        android:layout_gravity="center"
+        android:text="Aroma Name"/>
+
+    <ImageView
+        android:id="@+id/aromaImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"/>
+</LinearLayout>
