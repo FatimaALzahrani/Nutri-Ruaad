@@ -121,18 +121,8 @@ public class AdminAromasActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Nutrition(View view) {
-        Intent intent = new Intent(AdminAromasActivity.this, NutritionActivity.class);
-        startActivity(intent);
-    }
-
-    public void Aromas(View view) {
-        Intent intent = new Intent(AdminAromasActivity.this, AromasActivity.class);
-        startActivity(intent);
-    }
-
-    public void Profile(View view) {
-        Intent intent = new Intent(AdminAromasActivity.this, ProfileActivity.class);
+    public void Astronaut(View view) {
+        Intent intent = new Intent(AdminAromasActivity.this, AstronautManageActivity.class);
         startActivity(intent);
     }
 

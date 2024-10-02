@@ -106,7 +106,7 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/user2"
-                android:onClick="Profile"
+                android:onClick="Astronaut"
                 android:scaleType="centerInside"/>
 
         </LinearLayout>
