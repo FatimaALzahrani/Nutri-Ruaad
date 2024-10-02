@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     }, 3000);
                 } else {
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                        startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
                         finish();
                     }, 3000);
                 }
